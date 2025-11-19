@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MagicAndroid Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>📡 Internet Status</h1>
+    <p><strong>IP Address:</strong> <span id="ip">Loading...</span></p>
+    <p><strong>Proxy Status:</strong> <span id="proxy">Checking...</span></p>
+    <p><strong>VPN Status:</strong> <span id="vpn">Manual Check</span></p>
+  </div>
+
+  <script>
+    fetch("https://api.ipify.org?format=json")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("ip").textContent = data.ip;
+        document.getElementById("proxy").textContent = "Direct";
+      })
+      .catch(() => {
+        document.getElementById("ip").textContent = "Unavailable";
+        document.getElementById("proxy").textContent = "Proxy or VPN";
+      });
+  </script>
+</body>
+</html>
